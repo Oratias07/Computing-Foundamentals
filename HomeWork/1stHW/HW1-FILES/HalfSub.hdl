@@ -1,0 +1,15 @@
+// This file is part of www.nand2tetris.org
+// and the book "The Elements of Computing Systems"
+// by Nisan and Schocken, MIT Press.
+
+CHIP HalfSub {
+    IN a ,b;
+    OUT diff, bOut;
+
+    PARTS:
+    Xor(a = a, b = b, out = diff); // compute diff
+
+    // compute bOut
+    Not(in = a, out = notA);
+    And(a= notA, b = b, out = bOut);
+}

@@ -1,0 +1,17 @@
+// This file is part of www.nand2tetris.org
+// and the book "The Elements of Computing Systems"
+// by Nisan and Schocken, MIT Press.
+
+CHIP AdderSub {
+    // (s)control == 0 --> 1 (out) fullAdder
+    //(s)control == 1 --> 0 (out) fullSub
+
+    IN a,b,control,cIn;
+    OUT res,cOut;
+
+    PARTS:
+    FullSub(a = a, b = b, bIn = cIn, diff = aSbScIn, bOut = borrow);
+    FullAdder(a = a, b = b, c = cIn, sum = aAbAcIn, carry = carry);
+    Mux(a = aAbAcIn, b = aSbScIn, sel = control, out = res);
+    Mux(a = carry, b = borrow, sel = control, out = cOut);
+}
