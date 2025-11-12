@@ -40,5 +40,32 @@ CHIP ALU {
         ng;      // (out < 0,  1, 0)
 
     PARTS:
-    //// Replace this comment with your code.
+
+    // 1st + 2nd iteration
+    Mux16(a = x, b = false, sel = zx, out = x1);
+    Not16(in = x1, out = xNot);
+    Mux16(a = x1, b = xNot, sel = nx, out = x2);
+
+    // 3rd + 4th  iteration
+    Mux16(a = y, b = false, sel = zy, out = y1);
+    Not16(in = y1, out = yNot);
+    Mux16(a = y1, b = yNot, sel = ny, out = y2);
+
+    // doing arithmetic operations
+    And16(a = x2, b = y2, out = xAndy);
+    Add16(a = x2, b = y2, out = xAddy);
+    
+    // placement according to f
+    Mux16(a = xAndy, b = xAddy, sel = f, out = xFy);
+
+    // placement according to no
+    Not16(in = xFy, out = xFyNot);
+    Mux16(a = xFy, b = xFyNot, sel = no, out = out,
+                out[0..7] = tmp1, out[8..15] = tmp2, out[15] = ng); // placenent ng value
+    
+    // placement in zr value
+    Or8Way(in = tmp1, out = or1);
+    Or8Way(in = tmp2, out = or2);
+    Or(a = or1, b = or2, out = zrNot);
+    Not(in = zrNot, out = zr);
 }
