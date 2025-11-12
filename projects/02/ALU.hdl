@@ -25,6 +25,7 @@
 // if (f == 1)  sets out = x + y  // integer 2's complement addition
 // if (f == 0)  sets out = x & y  // bitwise and
 // if (no == 1) sets out = !out   // bitwise not
+
 CHIP ALU {
     IN  
         x[16], y[16],  // 16-bit inputs        
