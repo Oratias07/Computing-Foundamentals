@@ -1,0 +1,9 @@
+CHIP IsNegEven4 {
+    IN a[4];
+    OUT out;
+    
+	PARTS:
+	Not(in = a[0], out=isEven);
+	Mux(a = false, b = isEven, sel = a[3], out=out);
+
+}
