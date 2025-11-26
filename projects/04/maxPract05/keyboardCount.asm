@@ -2,7 +2,7 @@
 // Here is a program that counts the number of times any key has been pressed.
 // You can notice that when a key is pressed for a long time, the loop that counts the number of times KBD is different from zero will give a very large number that does not reflect the number of presses. Because this is how you need to count the number of key presses or releases.
 // Assuming that the user only presses one key at a time, before pressing KBD is equal to zero, while after pressing it is greater than zero. Because of this, if you write a loop that compares the current key press with the previous one, if the current key press is greater than the previous one, it means that exactly one key has been pressed.
-// The following code in C counts the presses:
+// The following code counts the presses:
 
 
 //cur define
