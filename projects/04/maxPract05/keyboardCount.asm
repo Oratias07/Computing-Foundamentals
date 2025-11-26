@@ -4,9 +4,9 @@
 // Assuming that the user only presses one key at a time, before pressing KBD is equal to zero, while after pressing it is greater than zero. Because of this, if you write a loop that compares the current key press with the previous one, if the current key press is greater than the previous one, it means that exactly one key has been pressed.
 // The following code in C counts the presses:
 
+
 //cur define
 @cur
-
 //prev=0
 @prev
 M=0
@@ -17,7 +17,6 @@ M=0
     D=M
 
     //cur=KBD
-
     @cur
     M=D
 
