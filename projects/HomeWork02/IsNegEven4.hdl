@@ -1,3 +1,7 @@
+// isEven = LSB == 0
+// Negative check = MSB (sign bit) == 1
+// If negative → output = isEven, else output = 0
+
 CHIP IsNegEven4 {
     IN a[4];
     OUT out;
