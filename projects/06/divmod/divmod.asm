@@ -69,15 +69,15 @@ M=D
 0;JMP
 
 (RET1)
-//saving the return function
-@R5
-M=D
+    //saving the return function
+    @R5
+    M=D
 
-//freeing parameters
-@5
-D=A
-@SP
-M=M+D
+    //freeing parameters
+    @5
+    D=A
+    @SP
+    M=M+D
 
 //////////////////////////////////////////////////////
 //////////////////////////////////////////////////////
