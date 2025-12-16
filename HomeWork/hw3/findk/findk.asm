@@ -1,6 +1,12 @@
 // Main program
 // initialize variables
 (MAIN)
+    //  initializing SP (address R0)
+    @SCREEN
+    D=A
+    @SP
+    M=D
+
     // initialize variables
     // put the address in R1 to arr
     @R1
@@ -18,7 +24,7 @@
     @k
     M=D
 
-    // put values to stack (k->size->arr)
+    // push values to stack (arr->size->k)
     // save k
     @k
     D=M
@@ -35,7 +41,7 @@
     M=D
     // save *arr
     @arr
-    D=A
+    D=M
     @SP
     M=M-1
     A=M
@@ -64,10 +70,7 @@
     @SP
     M=M+D
 
-
-
-
-    // put values to stack (size->arr->kth)
+    // push values to stack (size->arr->kth)
     // save k
     @size
     D=M
@@ -77,7 +80,7 @@
     M=D
     // save *arr
     @arr
-    D=A
+    D=M
     @SP
     M=M-1
     A=M
@@ -125,35 +128,37 @@
 // findKth(int arr[], int size, int k)
 (findAboveCount)
     // initialize variables
-    @i
+    @i1
     M=0
     @greaterThan
     M=0
 
     // initialize variables from stack (to global variables)
-    // size = size
+    // num = num
     @SP
-    A=M
+    A=M+1
     D=M
-    @size
+    @num
     M=D
     // *arr = *arr
     @SP
     A=M+1
+    A=A+1
     D=M
     @arr
     M=D
-    // num = num
+    // size = size
     @SP
     A=M+1
     A=A+1
+    A=A+1
     D=M
-    @num
+    @size
     M=D
 
 (LOOP1)
     // D=size-i
-    @i
+    @i1
     D=M
     @size
     D=M-D
@@ -163,7 +168,7 @@
     D;JLE
 
     // D=arr[i]-num
-    @i
+    @i1
     D=M
     @arr
     A=M+D
@@ -180,7 +185,7 @@
     M=M+1
 
     (CONTLOOP1)
-        @i
+        @i1
         M=M+1
         @LOOP1
         0;JMP
@@ -196,7 +201,7 @@
     A=M
     0;JMP
     
-// Finds the k-th largest element in the array
+// Count elements strictly greater than num
 // findKth(int arr[], int size, int k)
 (findKth)
     // initialize variables
@@ -204,24 +209,26 @@
     M=0
 
     // initialize variables from stack (to global variables)
-    // k = k
+    // *arr = *arr
     @SP
-    A=M
+    A=M+1
     D=M
-    @k
+    @arr
     M=D
     // size = size
     @SP
     A=M+1
+    A=A+1    
     D=M
     @size
     M=D
-    // *arr = *arr
+    // k = k
     @SP
     A=M+1
     A=A+1
+    A=A+1
     D=M
-    @arr
+    @k
     M=D
 
 (LOOP2)
@@ -245,7 +252,7 @@
     M=D
     // save *arr
     @arr
-    D=A
+    D=M
     @SP
     M=M-1
     A=M
