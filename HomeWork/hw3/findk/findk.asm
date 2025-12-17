@@ -1,7 +1,7 @@
 // Main program
 // initialize variables
 (MAIN)
-    //  initializing SP (address R0)
+    // initializing SP (address R0)
     @SCREEN
     D=A
     @SP
@@ -64,6 +64,10 @@
     @kth
     M=D
 
+    // save to R4 too
+    @R4
+    M=D
+    
     // freeing stack
     @4
     D=A
@@ -108,9 +112,6 @@
     (RET02)
     // save returning value
     @aboveCount
-    M=D
-    // save to R2 too
-    @R2
     M=D
 
     // freeing stack
