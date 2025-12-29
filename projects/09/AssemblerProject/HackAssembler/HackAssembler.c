@@ -61,7 +61,7 @@ int main(int argc, char* argv[])
 
 
         char line[LINE_MAX_SIZE];
-        char symbol[LINE_MAX_SIZE]];
+        char symbol[LINE_MAX_SIZE];
         FILE *hp;
         int count = 0;
         
@@ -83,39 +83,49 @@ int main(int argc, char* argv[])
 
         parser_rewind();
         char strbin[LINE_MAX_SIZE]; 
-        int symbol01;
-        int intbin, lineCount = 0;
+        char symbol01[LINE_MAX_SIZE];
+        int intbin, varCount = 16;
 
-        while (hp) {
+        while (parser_parseNextLine(line)) {
             if (parser_instructionType() == A_INSTRUCTION) {
+                parser_address(symbol01);
                 if (symbol01[0] > '0' && symbol01 < '9') {
-                    fprintf(hp,"%s\n", symbolTable_getAddress() ); // code_convertIntToBinString(atoi(symbol01), strbin)
+                        code_convertIntToBinString(atoi(symbol01), strbin);
                 }
-                if (symbolTable_getAddress(symbol01) == -1) {
-                    symbolTable_addEntry(symbol01, lineCount);
-                    intbin = symbolTable_getAddress(symbol01);
+                
+                else {
+                    if (symbolTable_getAddress(symbol01) == -1) {
+                        symbolTable_addEntry(symbol01, varCount);
+                        code_convertIntToBinString(varCount++, strbin);
+                    }
 
-
+                    else {
+                        int x = symbolTable_getAddress(symbol01);
+                        code_convertIntToBinString(x,strbin);
+                    }
                 }
-                lineCount++;
+                fprintf(hp, "%s\n", strbin);
             }
-            if (parser_instructionType() == C_INSTRUCTION) lineCount++;
+
+            if (parser_instructionType() == C_INSTRUCTION) {
+                char str[LINE_MAX_SIZE] = "111";
+                char tmp[LINE_MAX_SIZE];
+
+                parser_comp(tmp);
+                code_comp(tmp, strbin);
+                strcat(str, strbin);  
+
+                parser_dest(tmp);
+                code_dest(tmp, strbin);
+                strcat(str, strbin);
+
+                parser_jump(tmp);
+                code_jump(tmp, strbin);
+                strcat(str, strbin);
+
+                fprintf("%s", str);
+            }
         }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
         //learn the example code below delete it and write your code here
          
