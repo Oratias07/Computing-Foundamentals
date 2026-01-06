@@ -1,0 +1,39 @@
+function quotient.main 0
+// q - static 0
+push constant 988
+push constant 21
+call quotient.calcQuotient 2
+pop static 0
+label END
+goto END
+
+function quotient.calcQuotient 3
+// q - local 0
+// rem - local 1
+// v - local 2
+push constant 0
+pop local 0
+push argument 0
+push argument 1
+sub
+pop local 2
+
+label WHILE
+push local 2
+push constant 0
+lt
+if-goto END_WHILE
+// q++
+push local 0
+push constant 1
+add
+pop local 0
+push local 2
+push argument 1
+sub
+pop local 2
+goto WHILE
+
+label END_WHILE
+push local 0
+return
