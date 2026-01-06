@@ -1,0 +1,52 @@
+// int x = 988 - static 0
+push constant 988
+pop static 0
+
+// int y = 21 - static 1
+push constant 21
+pop static 1
+
+// int q = 0 - temp 0
+push constant 0
+pop temp 0
+
+// int v = x - y static 2
+push static 0
+push static 1
+sub
+pop static 2
+
+// WHILE_LOOP while (v >= y)
+label WHILE_LOOP
+push static 2
+push constant 0
+lt
+if-goto ENDLOOP
+
+// loop body
+// q++
+push temp 0
+push constant 1
+add
+pop temp 0
+
+// v = v - y
+push static 2
+push static 1
+sub
+pop static 2
+
+// continue loop
+goto WHILE_LOOP
+
+// end of loop
+label ENDLOOP
+
+// int rem = v + y - static 3
+push static 2
+push static 1
+add
+pop static 3
+
+label END
+goto END

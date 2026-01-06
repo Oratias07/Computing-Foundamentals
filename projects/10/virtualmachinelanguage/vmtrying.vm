@@ -1,0 +1,46 @@
+
+   // int x, y, sum, n;
+   // temp 0-x, 1-y, 2-sum, 3-n
+   // x = 11
+   push constant 11
+   pop static 0   // x
+   
+   // y = 13
+   push constant 13
+   pop static 1  // y
+   
+   // sum = 0
+   push constant 0
+   pop static 2 // sum
+   
+   
+   // n = 1
+   push constant 1
+   pop static 3  // n
+
+label WHILE_LOOP
+   // if (n > y) goto ENDLOOP;
+   push static 3 // push n
+   push static 1 // push y 
+   gt
+   if-goto ENDLOOP
+   
+   // sum += x;
+   push static 2 // push sum
+   push static 0 // push x
+   add
+   pop static 2  // pop sum
+   
+   // n = n + 1;
+   push static 3 // push n
+   push constant 1
+   add
+   pop static 3  // pop n
+
+   // goto WHILE_LOOP;
+   goto WHILE_LOOP
+
+label ENDLOOP
+
+label WAIT
+   goto WAIT
