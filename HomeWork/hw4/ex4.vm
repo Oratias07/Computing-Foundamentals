@@ -1,0 +1,111 @@
+//Neta Baron 213554512 & Or Atias 212604458
+//ex4.vm
+
+//Write the main function (ex4.main) here, 
+//and then the function SumOfSquares (ex4.SumOfSquares).
+//From the main function call the function SumOfSquares,
+//assume that the parameter that you need to send 
+//to the function are on the static segment:
+//n - static 0, result - static 1.
+//Pass the parameter from the static segment and write the result to the static segment.
+
+// *Main function*
+
+// void main() {
+// static int result;
+function ex4.main 0
+
+//argument - none 
+// local - none
+// static 0-n
+// static 1-result
+
+// result= SumOfSquares(n);
+   push static 0
+   call ex4.SumOfSquares 1
+   pop static 1
+
+// LOOP:
+label LOOP
+   // goto LOOP;
+   goto LOOP
+
+
+// *Mult function*
+
+
+// int mult(x,y) {
+// int sum, n; 
+function ex4.mult 2
+// argument 0-x,1-y
+// local 0-sum, 1-n
+   // sum = 0
+   push constant 0
+   pop local 0 //sum
+   //n = 1
+   push constant 1
+   pop local 1 //n
+// WHILE_LOOP:
+label WHILE_LOOP
+   //if(n>y) goto ENDLOOP;
+   push local 1 //n
+   push argument 1 //y 
+   gt
+   if-goto ENDLOOP
+   // sum += x;
+   push local 0 //sum
+   push argument 0 //x
+   add
+   pop local 0 //sum
+   // n = n + 1;
+   push local 1 //n
+   push constant 1
+   add
+   pop local 1 //n
+   // goto WHILE_LOOP;
+   goto WHILE_LOOP
+// ENDLOOP:
+label ENDLOOP
+   // return sum;
+   push local 0 //sum
+   return
+
+
+// *SumOfSquares function*
+
+// int SumOfSquares(n)
+// int squaresum
+function ex4.SumOfSquares 2
+    // argument 0: n
+    // local 0: squaresum
+    // local 1: temp
+
+    // if (n == 1) goto BASE_CASE
+    push argument 0
+    push constant 1
+    eq
+    if-goto BASE_CASE
+
+    // squaresum = mult(n, n)
+    push argument 0
+    push argument 0
+    call ex4.mult 2
+    pop local 0
+
+    // temp = SumOfSquares(n-1)
+    push argument 0
+    push constant 1
+    sub
+    call ex4.SumOfSquares 1
+    pop local 1
+
+    // return squaresum + temp
+    push local 0
+    push local 1
+    add
+    return
+
+//BASE_CASE:
+label BASE_CASE
+    push constant 1
+    return
