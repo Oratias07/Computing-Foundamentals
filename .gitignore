@@ -1,1 +1,22 @@
+# Documents / writeups (kept locally, not published)
 *.docx
+
+# Archives
+*.zip
+
+# Build artifacts
+*.exe
+*.o
+build/
+
+# Nand2Tetris generated test output
+*.out
+
+# OS cruft
+.DS_Store
+._*
+Thumbs.db
+
+# Editor / tooling
+.vscode/
+.dist/
